@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="CSS/register.css" />
+  </head>
+  <body>
+    <div id="Banner">How To Train Your Pokemon</div>
+    <form id="Register" action="" method="post">
+      <div class="form-group">
+        <label for="mail">Email:</label>
+        <input type="email" id="mail" placeholder="Enter Email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="user">Username:</label>
+        <input
+          type="text"
+          placeholder="Enter Username"
+          name="username"
+          id="user"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="pass">Password:</label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          pattern="[A-Za-z0-9]+"
+          minlength="4"
+          maxlength="10"
+          id="pass"
+          required
+        />
+      </div>
+      <!-- <div class="form-group">
+        <label>Re-enter Password:</label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="re-password"
+          required
+        />
+      </div> -->
+      <button type="submit">Register</button>
+      <div>
+        Already have an account?
+        <a href="login.html">Log in</a>
+      </div>
+    </form>
+  </body>
+</html>

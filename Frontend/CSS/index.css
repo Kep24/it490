@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(6,1fr);
+    background-image: url('../Assets/Images/background.jpg');
+}
+#Banner {
+    display: flex;
+    background-color: #e09398;
+    font-size: 5vh;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-top: none;
+    border-width: 1px;
+    grid-column: 1 / 7;
+    grid-row: 1;
+    padding: 0;
+}
+#Welcome {
+    display: flex;
+    flex-direction: column;
+    background-color: #74be78    ;
+    font-size: 3vh;
+    align-content: center;
+    align-items: center;
+    grid-column: 2 / span 2;
+    grid-row: 3 / span 2;
+    border: solid;
+    border-radius: 10px;
+}
+p {
+    font-size: 5vh;
+}
+a {
+    font-size: 2rem;
+    margin-left: 2rem;
+}
