@@ -1,30 +1,20 @@
 <?php
 
-Class Database{
- 
-	private $server = "mysql:host=localhost;dbname=ecomm";
-	private $username = "root";
-	private $password = "";
-	private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
-	protected $conn;
- 	
-	public function open(){
- 		try{
- 			$this->conn = new PDO($this->server, $this->username, $this->password, $this->options);
- 			return $this->conn;
- 		}
- 		catch (PDOException $e){
- 			echo "There is some problem in connection: " . $e->getMessage();
- 		}
- 
-    }
- 
-	public function close(){
-   		$this->conn = null;
- 	}
- 
-}
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
 
-$pdo = new Database();
+$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+
+$request = array();
+$request['type'] = "login";
+$request['username'] = $argv[1];
+$request['password'] = $argv[2];
+$response = $client->send_request($request);
+
+echo "client received response: ".PHP_EOL;
+print_r($response);echo "\n\n";
+
+echo $argv[6]." END".PHP_EOL;
  
 ?>
