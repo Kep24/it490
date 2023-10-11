@@ -1,7 +1,7 @@
 <?php
 
 
-	include 'includes/session.php';
+	///include 'includes/session.php';
 
 	if(isset($_POST['signup'])){
 		$firstname = $_POST['firstname'];
