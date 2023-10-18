@@ -1,36 +1,30 @@
+//DataBase Connection
+
 <?php 
-session_start(); 
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
+$client_log = new rabbitMQClient("logging.ini", "Logging");
 
-//Include necessary files for RabbitMQ and database connections
-require_once 'db.php'; //Contains database conenction code 
-require_once 'rabbitmqphp'; //Contains RabbitMQ connection code
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
-	{	
-		$username = $_POST['username']; 
-		$email = $_POST['email'];
-		$password = $_POST['password']; 
+	$dbhost = "localhost"; 
+	$dbuser = "yessica"; 
+	$dbpass = "NJIT";
+	$dbname = "IT490"; 
 
-		//Perform input validation (e.g., check for valid email format strong password)
+	//Creating connection with DataBase
+	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname); 
+		
 	
-		if(isInputValid($username, $email, $password)) {
-			//Hash the password for secure storage
-			$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-	
-			//Insert the new user into the database
-			$inserted = createUser($username, $email, $hashedPassword);
-
-			if($inserted) { 
-				//Send a message to RabbitNQ for email confirmation or other tasks
-				sendRegistrationConfirmation($username); 
-				//Redirect to a success page or login page
-				header('Location: registration_success.php'); 
-				exit; 
-			}	
-		}			else {
-					$error = "User registration failed. Please try again later."; 
-			}
+	//Verifying connection
+	if (!$conn) 
+	{
+	$log = "Connection Failed: " . mysqli_connect_error();
+	$client_log->publish($log);
+		die("Connection Failed: " . mysqli_connect_error()); 
 	}
 
+	echo "Connection Successful. Welcome!"; 
+	
 ?>
