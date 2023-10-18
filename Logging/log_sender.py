@@ -13,14 +13,9 @@ channel.exchange_declare(exchange='logs', exchange_type='fanout',
  passive=False, durable=True, auto_delete=False)
  
 queue = channel.queue_declare(queue='logger')
-queue_name = queue.method.queue
+channel.queue_bind(exchange="logs", queue=queue.method.queue)
 
-channel.queue_bind(exchange="logs", queue=queue_name)
-
-def callback(ch, method, properties, body):
-	print(f" [x] {body}") 
- 
-channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
-channel.start_consuming()
-
-
+message ="Testing logging system"
+channel.basic_publish(exchange='logs', routing_key='', body=message)
+print(f" [x] {message}")
+connection.close()
