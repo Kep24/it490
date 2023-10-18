@@ -2,6 +2,8 @@
 
 <?php 
 
+session_start();
+
 	$dbhost = "localhost"; 
 	$dbuser = "yessica"; 
 	$dbpass = "NJIT";
