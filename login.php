@@ -1,10 +1,11 @@
-<?php ///include 'includes/session.php'; ?>
+<!-- switched session.php for conn.php in the include -->
+<?php include 'conn.php'; ?>
 <?php
-  if(isset($_SESSION['user'])){
-    header('location: cart_view.php');
-  }
+  ///if(isset($_SESSION['user'])){
+    ///header('location: cart_view.php');
+  ///}
 ?>
-<?php include 'includes/header.php'; ?>
+<?php ///include 'includes/header.php'; ?>
 <body class="hold-transition login-page">
 <div class="login-box">
   	<?php
@@ -50,6 +51,6 @@
   	</div>
 </div>
 	
-<?php include 'includes/scripts.php' ?>
+<?php ///include 'includes/scripts.php' ?>
 </body>
 </html>
