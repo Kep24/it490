@@ -1,18 +1,14 @@
-//DataBase Connection
+#!/usr/bin/php
 
 <?php 
-require_once('path.inc');
-require_once('get_host_info.inc');
-require_once('rabbitMQLib.inc');
+
+include_once('rabbitMQLib.inc');
+
 $client_log = new rabbitMQClient("logging.ini", "Logging");
-
-
-
-session_start();
 
 	$dbhost = "localhost"; 
 	$dbuser = "yessica"; 
-	$dbpass = "NJIT";
+	$dbpass = "NJITserver2024@!";
 	$dbname = "IT490"; 
 
 	//Creating connection with DataBase
@@ -28,5 +24,6 @@ session_start();
 	}
 
 	echo "Connection Successful. Welcome!"; 
-	
+	$log = "Connection Successful. Red testing";
+	$client_log->publish($log);
 ?>
