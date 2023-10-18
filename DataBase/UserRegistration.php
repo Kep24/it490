@@ -1,6 +1,12 @@
 //DataBase Connection
 
 <?php 
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
+$client_log = new rabbitMQClient("logging.ini", "Logging");
+
+
 
 session_start();
 
@@ -16,6 +22,8 @@ session_start();
 	//Verifying connection
 	if (!$conn) 
 	{
+	$log = "Connection Failed: " . mysqli_connect_error();
+	$client_log->publish($log);
 		die("Connection Failed: " . mysqli_connect_error()); 
 	}
 
