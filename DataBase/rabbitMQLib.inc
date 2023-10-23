@@ -33,7 +33,10 @@ class rabbitMQServer
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
-		$this->queue = $this->machine[$server]["QUEUE"];
+		if (isset( $this->machine[$server]["QUEUE"]))
+		{
+			$this->queue = $this->machine[$server]["QUEUE"];
+		}
 	}
 
 	function process_message($msg)
