@@ -1,5 +1,5 @@
 <!-- switched session.php for conn.php in the include -->
-<?php include 'conn.php'; ?>
+<!-- <?php include 'conn.php'; ?> -->
 <?php
   ///if(isset($_SESSION['user'])){
     ///header('location: cart_view.php');
@@ -29,9 +29,9 @@
   	<div class="login-box-body">
     	<p class="login-box-msg">Sign in to start your session</p>
 
-    	<form action="verify.php" method="POST">
+    	<form action="conn.php" method="POST">
       		<div class="form-group has-feedback">
-        		<input type="email" class="form-control" name="email" placeholder="Email" required>
+        		<input type="text" class="form-control" name="user" placeholder="Username" required>
         		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       		</div>
           <div class="form-group has-feedback">
