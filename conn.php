@@ -8,8 +8,8 @@ $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 
 $request = array();
 $request['type'] = "login";
-$request['username'] = $argv[1];
-$request['password'] = $argv[2];
+$request['username'] = $_POST["user"];
+$request['password'] = $_POST["password"];
 $response = $client->send_request($request);
 
 echo "client received response: ".PHP_EOL;
