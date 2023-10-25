@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import pika
 from pika import DeliveryMode
 from pika.exchange_type import ExchangeType
