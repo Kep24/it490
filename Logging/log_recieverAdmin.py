@@ -4,7 +4,7 @@ import pika
 from pika import DeliveryMode
 from pika.exchange_type import ExchangeType
 
-credentials = pika.PlainCredentials#('', '') Put in your rabbitMQ user/pass here
+credentials = pika.PlainCredentials('admin', '490Pass') #Put in your rabbitMQ user/pass here
 parameters = pika.ConnectionParameters('10.147.20.15', 5672, 'testHost', credentials)
 connection = pika.BlockingConnection(parameters)
 

@@ -23,7 +23,7 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	}
 function doLogin($user, $password){
 	$password_hashed = password_hash($password, PASSWORD_DEFAULT);
-	$query = "SELECT Username, Password FROM Users where Username = $user && Password = $password_hashed"
+	$query = "SELECT Username, Password FROM Users where Username = :user && Password = :password_hashed"
 	$stmt = $mysqli->prepare($query);
 	$stmt->execute();
 	$stmt->bind_result($n1, $p1);
@@ -39,7 +39,8 @@ function requestProcessor($request)
 	var_dump($request)
 	if(!isset($request['type']))
   {
-    return "ERROR: unsupported message type";
+    $log = "ERROR: unsupported message type";
+    $client_log->publish($log);
   }
   switch ($request['type'])
   {
@@ -52,8 +53,9 @@ function requestProcessor($request)
 }
 	$client_login = new rabbitMQClient("testRabbitMQ.ini", "Database");
 	$client_login->process_requests('requestProcessor'); 
+	if $log = null{
 	$log = "Connection Successful. Red testing";
-	$client_log->publish($log);
+	$client_log->publish($log);}
 	exit();
 	
 ?>
