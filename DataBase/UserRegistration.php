@@ -2,7 +2,10 @@
 
 <?php 
 
-include_once('rabbitMQLib.inc');
+require_once('rabbitMQLib.inc');
+require_once('get_host_info.inc');
+require_once('path.inc');
+require_once('login.php.inc'); 
 
 $client_log = new rabbitMQClient("logging.ini", "Logging");
 
@@ -23,8 +26,9 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	}
 function doLogin($user, $password){
 	$password_hashed = password_hash($password, PASSWORD_DEFAULT);
-	$query = "SELECT Username, Password FROM Users where Username = :user && Password = :password_hashed"
-	$stmt = $conn->prepare($query);
+	//$query = "SELECT Username, Password FROM Users where Username = ? && Password = ?"
+	$stmt = $conn->prepare("SELECT Username, Password FROM Users WHERE Username = ? && Password = ?");
+	$stmt->bind_param('ss', $user, $password_hashed); 
 	$stmt->execute();
 	$stmt->bind_result($n1, $p1);
 	$stmt->fetch();
@@ -36,7 +40,8 @@ function doLogin($user, $password){
 }
 
 function requestProcessor($request)
-	var_dump($request)
+{
+	var_dump($request);
 	if(!isset($request['type']))
   {
     $log = "ERROR: unsupported message type";
@@ -51,9 +56,9 @@ function requestProcessor($request)
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
-	$client_login = new rabbitMQClient("testRabbitMQ.ini", "Database");
+	$client_login = new rabbitMQServer("testRabbitMQ.ini", "Database");
 	$client_login->process_requests('requestProcessor'); 
-	if $log = null{
+	if ($log = null){
 	$log = "Connection Successful. Red testing";
 	$client_log->publish($log);}
 	exit();
