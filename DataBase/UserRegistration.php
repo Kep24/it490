@@ -24,7 +24,7 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 function doLogin($user, $password){
 	$password_hashed = password_hash($password, PASSWORD_DEFAULT);
 	$query = "SELECT Username, Password FROM Users where Username = :user && Password = :password_hashed"
-	$stmt = $mysqli->prepare($query);
+	$stmt = $conn->prepare($query);
 	$stmt->execute();
 	$stmt->bind_result($n1, $p1);
 	$stmt->fetch();
