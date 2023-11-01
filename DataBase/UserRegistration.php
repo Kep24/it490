@@ -32,14 +32,16 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	//}
 function doLogin($user, $password){
 	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
-	global $conn;
+	global $conn, $client_log;
 	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username && Passwords = :password");
 	$stmt->bindParam(':username', $user);
 	$stmt->bindParam(':password', $password);
 	$stmt->execute();
-	$result = stmt->fetch(PDO::FETCH_ASSOC);
-	$client_log->publish($result);
-	$p1 = $result['password'];
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+//	$client_log->publish($result);
+	$p1 = $result['Passwords'];
+	var_dump($result);
+
 	return $p1;
 	//if (password_verify($password, $result)){
 	//	return "allow";
