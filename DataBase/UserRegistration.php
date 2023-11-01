@@ -33,9 +33,9 @@ function doLogin($user, $password){
 	$stmt->bind_result($n1, $p1);
 	$stmt->fetch();
 	if (password_verify($password, $p1)){
-		return false;
-	} else {
 		return true;
+	} else {
+		return false;
 	}
 }
 
