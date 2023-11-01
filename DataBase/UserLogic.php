@@ -1,6 +1,10 @@
+#!/usr/bin/php
+
 <?php 
 
 //Database conenction setup 
+       // echo password_hash("NJIT490", PASSWORD_DEFAULT);
+
 
 function isInputValid($username, $email, $password) 
 {
