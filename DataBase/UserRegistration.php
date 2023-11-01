@@ -28,7 +28,7 @@ function doLogin($user, $password){
 	$stmt->bindParam(':password', $password); //replace with $passwordH when ready
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	//$client_log->publish($result); FIX THIS
+	$client_log->publish($result); //FIX THIS
 	$p1 = $result['Passwords'];
 	if ($p1 != null){
 		return "allow";
