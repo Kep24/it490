@@ -22,34 +22,25 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	{
 	$log = "Connection Failed: " . mysqli_connect_error();
 	$client_log->publish($log);
-		die("Connection Failed: " . mysqli_connect_error()); 
+		die($log); 
 	}
 function doLogin($user, $password){
 	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
-	//$query = "SELECT Username, Password FROM Users where Username = ? && Password = ?"
-	$conn = mysqli_connect('localhost', 'yessica', 'NJITserver2024@!', 'IT490'); 
-	$stmt = $conn->prepare("SELECT UserNames, Passwords FROM Users WHERE UserNames = ? && Passwords = ?");
-	$stmt->bind_param('ss', $user, $password); 
+	$conn = mysqli_connect('localhost', 'yessica', 'NJITserver2024@!', 'IT490');
+	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username && Passwords = :password");
+	$stmt->bindParam(':username', $user);
+	$stmt->bindParam(':password', $password);
 	$stmt->execute();
-	$stmt->bind_result($n1, $p1);
-	$stmt->fetch();
-	
-
-	//if (password_verify($password, $p1))
-	//{
-		//return "allow";//}
-	//else  {
-
-	if (password_verify($password, $p1)){
-			$newhash=password_hash($p1, PASSWORD_DEFAULT);
-			return "allow";
-		}
-		else {
-			return "deny";
-		}
-	//}
-
-}
+	$result = stmt->fetch(PDO::FETCH_ASSOC);
+	$client_log->publish($result);
+	$p1 = $result['password'];
+	//if (password_verify($password, $result)){
+	//	return "allow";
+	//	}
+	//else { 
+	//	return "deny"
+	//	}
+	}
 function requestProcessor($request)
 {
 	var_dump($request);
