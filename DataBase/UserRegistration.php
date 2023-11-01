@@ -25,20 +25,39 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 		die("Connection Failed: " . mysqli_connect_error()); 
 	}
 function doLogin($user, $password){
-	$password_hashed = password_hash($password, PASSWORD_DEFAULT);
+	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
 	//$query = "SELECT Username, Password FROM Users where Username = ? && Password = ?"
-	$stmt = $conn->prepare("SELECT Username, Password FROM Users WHERE Username = ? && Password = ?");
-	$stmt->bind_param('ss', $user, $password_hashed); 
+	$conn = mysqli_connect('localhost', 'yessica', 'NJITserver2024@!', 'IT490'); 
+	$stmt = $conn->prepare("SELECT UserNames, Passwords FROM Users WHERE UserNames = ? && Passwords = ?");
+	$stmt->bind_param('ss', $user, $password); 
 	$stmt->execute();
 	$stmt->bind_result($n1, $p1);
 	$stmt->fetch();
+<<<<<<< HEAD
 	if (password_verify($password, $p1)){
 		return true;
 	} else {
 		return false;
 	}
 }
+=======
+>>>>>>> 40c3d1333e40f5707d001d1087ac6aa42b4b6388
 
+	//if (password_verify($password, $p1))
+	//{
+		//return "allow";//}
+	//else  {
+
+	if (password_verify($password, $p1)){
+			$newhash=password_hash($p1, PASSWORD_DEFAULT);
+			return "allow";
+		}
+		else {
+			return "deny";
+		}
+	//}
+
+}
 function requestProcessor($request)
 {
 	var_dump($request);
