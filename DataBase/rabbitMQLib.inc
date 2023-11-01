@@ -168,7 +168,10 @@ class rabbitMQClient
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
-		$this->queue = $this->machine[$server]["QUEUE"];
+		if (isset( $this->machine[$server]["QUEUE"]))
+		{
+			$this->queue = $this->machine[$server]["QUEUE"];
+		}
 	}
 
 	function process_response($response)
@@ -260,8 +263,8 @@ class rabbitMQClient
 			$exchange = new AMQPExchange($channel);
 			$exchange->setName($this->exchange);
 			$exchange->setType($this->exchange_type);
-			$this->conn_queue = new AMQPQueue($channel);
-			$this->conn_queue->setName($this->queue);
+			//$this->conn_queue = new AMQPQueue($channel); testing things
+			//$this->conn_queue->setName($this->queue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
 			return $exchange->publish($json_message,$this->routing_key);
 		}
