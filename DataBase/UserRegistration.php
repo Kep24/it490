@@ -32,7 +32,7 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	//}
 function doLogin($user, $password){
 	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
-	$conn = mysqli_connect('localhost', 'yessica', 'NJITserver2024@!', 'IT490');
+	global $conn;
 	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username && Passwords = :password");
 	$stmt->bindParam(':username', $user);
 	$stmt->bindParam(':password', $password);
