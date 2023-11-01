@@ -33,6 +33,7 @@ function doLogin($user, $password){
 	$stmt->execute();
 	$stmt->bind_result($n1, $p1);
 	$stmt->fetch();
+	
 
 	//if (password_verify($password, $p1))
 	//{
