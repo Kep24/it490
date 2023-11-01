@@ -9,21 +9,27 @@ require_once('login.php.inc');
 
 $client_log = new rabbitMQClient("logging.ini", "Logging");
 
-	$dbhost = "localhost"; 
+	//$dbhost = "localhost"; 
 	$dbuser = "yessica"; 
 	$dbpass = "NJITserver2024@!";
-	$dbname = "IT490"; 
+	//$dbname = "IT490"; 
 
 	//Creating connection with DataBase
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname); 
+	try{
+	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
+	}catch (PDOException $e){
+	$log = "Error: ". $e->getMessage();
+	print $log;
+	$client_log->publish($log);
+	}
 		
 	//Verifying connection
-	if (!$conn) 
-	{
-	$log = "Connection Failed: " . mysqli_connect_error();
-	$client_log->publish($log);
-		die($log); 
-	}
+	//if (!$conn) 
+	//{
+	//$log = "Connection Failed: " . PDO::errorInfo():;
+	//$client_log->publish($log);
+	//	die($log); 
+	//}
 function doLogin($user, $password){
 	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
 	$conn = mysqli_connect('localhost', 'yessica', 'NJITserver2024@!', 'IT490');
@@ -34,6 +40,7 @@ function doLogin($user, $password){
 	$result = stmt->fetch(PDO::FETCH_ASSOC);
 	$client_log->publish($result);
 	$p1 = $result['password'];
+	return $p1;
 	//if (password_verify($password, $result)){
 	//	return "allow";
 	//	}
