@@ -9,10 +9,8 @@ require_once('login.php.inc');
 
 $client_log = new rabbitMQClient("logging.ini", "Logging");
 
-	//$dbhost = "localhost"; 
 	$dbuser = "yessica"; 
-	$dbpass = "NJITserver2024@!";
-	//$dbname = "IT490"; 
+	$dbpass = "NJITserver2024@!"; 
 
 	//Creating connection with DataBase
 	try{
@@ -22,27 +20,22 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	print $log;
 	$client_log->publish($log);
 	}
-		
-	//Verifying connection
-	//if (!$conn) 
-	//{
-	//$log = "Connection Failed: " . PDO::errorInfo():;
-	//$client_log->publish($log);
-	//	die($log); 
-	//}
 function doLogin($user, $password){
-	//$password_hashed = password_hash($password, PASSWORD_DEFAULT);
+	//$passwordH = password_hash($password, PASSWORD_DEFAULT);
 	global $conn, $client_log;
 	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username && Passwords = :password");
 	$stmt->bindParam(':username', $user);
-	$stmt->bindParam(':password', $password);
+	$stmt->bindParam(':password', $password); //replace with $passwordH when ready
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-//	$client_log->publish($result);
+	//$client_log->publish($result); FIX THIS
 	$p1 = $result['Passwords'];
-	var_dump($result);
-
-	return $p1;
+	if ($p1 != null){
+		return "allow";
+	}
+	else{
+		return "deny";
+	}
 	//if (password_verify($password, $result)){
 	//	return "allow";
 	//	}
