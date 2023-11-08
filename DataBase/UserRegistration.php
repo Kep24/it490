@@ -7,7 +7,7 @@ require_once('get_host_info.inc');
 require_once('path.inc');
 require_once('login.php.inc'); 
 
-$client_log = new rabbitMQClient("logging.ini", "Logging");
+//$client_log = new rabbitMQClient("logging.ini", "Logging");
 
 	$dbuser = "yessica"; 
 	$dbpass = "NJITserver2024@!"; 
@@ -18,7 +18,7 @@ $client_log = new rabbitMQClient("logging.ini", "Logging");
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
-	$client_log->publish($log);
+	//$client_log->publish($log);
 	}
 function doLogin($user, $password){
 	//$passwordH = password_hash($password, PASSWORD_DEFAULT);
@@ -28,7 +28,7 @@ function doLogin($user, $password){
 	$stmt->bindParam(':password', $password); //replace with $passwordH when ready
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	$client_log->publish($result); //FIX THIS
+	//$client_log->publish($result); //FIX THIS
 	$p1 = $result['Passwords'];
 	if ($p1 != null){
 		return "allow";
@@ -49,7 +49,7 @@ function requestProcessor($request)
 	if(!isset($request['type']))
   {
     $log = "ERROR: unsupported message type";
-    $client_log->publish($log);
+   // $client_log->publish($log);
   }
   switch ($request['type'])
   {
@@ -62,9 +62,9 @@ function requestProcessor($request)
 }
 	$client_login = new rabbitMQServer("testRabbitMQ.ini", "Database");
 	$client_login->process_requests('requestProcessor'); 
-	if ($log = null){
-	$log = "Connection Successful. Red testing";
-	$client_log->publish($log);}
+//	if ($log = null){
+//	$log = "Connection Successful. Red testing";
+//	$client_log->publish($log);}
 	exit();
 	
 ?>
