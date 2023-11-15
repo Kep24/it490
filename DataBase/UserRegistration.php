@@ -13,7 +13,7 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
 	//Creating connection with DataBase
 	try{
-	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
+	$conn = new PDO('mysql:dbname=it490;host=localhost', $dbuser, $dbpass); 
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
@@ -27,7 +27,7 @@ function doLogin($user, $password){
 	$stmt->bindParam(':password', $password); //replace with $passwordH when ready
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	$client_log->publish($result); FIX THIS
+	$client_log->publish($result);
 	$p1 = $result['Passwords'];
 	if ($p1 != null){
 		return "allow";
