@@ -11,7 +11,7 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 	$dbuser = "red"; 
 	$dbpass = "490Pass"; 
 
-	//Creating connection with DataBase
+	//Creating connection with Database
 	try{
 	$conn = new PDO('mysql:dbname=it490;host=localhost', $dbuser, $dbpass); 
 	}catch (PDOException $e){
@@ -20,27 +20,18 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 	$client_log->publish($log);
 	}
 function doLogin($user, $password){
-	//$passwordH = password_hash($password, PASSWORD_DEFAULT);
 	global $conn, $client_log;
-	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username && Passwords = :password");
+	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username");
 	$stmt->bindParam(':username', $user);
-	$stmt->bindParam(':password', $password); //replace with $passwordH when ready
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	$client_log->publish($result);
 	$p1 = $result['Passwords'];
-	if ($p1 != null){
+	if (password_verify($password, $result['Passwords']){
 		return "allow";
 	}
 	else{
 		return "deny";
-	}
-	//if (password_verify($password, $result)){
-	//	return "allow";
-	//	}
-	//else { 
-	//	return "deny"
-	//	}
 	}
 function requestProcessor($request)
 {
@@ -56,6 +47,8 @@ function requestProcessor($request)
       return doLogin($request['username'],$request['password']);
     case "validate_session":
       return doValidate($request['sessionId']);
+    case "register":
+    	return createUser($request['username'],$request['email'], $request['password']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
@@ -64,6 +57,5 @@ function requestProcessor($request)
 	if ($log = null){
 	$log = "Connection Successful. Red testing";
 	$client_log->publish($log);}
-	exit();
 	
 ?>
