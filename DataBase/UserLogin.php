@@ -8,12 +8,12 @@ require_once('path.inc');
 
 $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
-	$dbuser = "red"; 
-	$dbpass = "490Pass"; 
+	$dbuser = "yessica"; 
+	$dbpass = "NJITserver2024@!"; 
 
 	//Creating connection with Database
 	try{
-	$conn = new PDO('mysql:dbname=it490;host=localhost', $dbuser, $dbpass); 
+	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
