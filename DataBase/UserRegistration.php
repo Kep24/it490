@@ -5,12 +5,11 @@
 require_once('rabbitMQLib.inc');
 require_once('get_host_info.inc');
 require_once('path.inc');
-require_once('login.php.inc'); 
 
 $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
-	$dbuser = "yessica"; 
-	$dbpass = "NJITserver2024@!"; 
+	$dbuser = "red"; 
+	$dbpass = "490Pass"; 
 
 	//Creating connection with DataBase
 	try{
