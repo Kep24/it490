@@ -5,15 +5,16 @@
 require_once('rabbitMQLib.inc');
 require_once('get_host_info.inc');
 require_once('path.inc');
+require_once('UserLogic.inc');
 
 $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
-	$dbuser = "yessica"; 
-	$dbpass = "NJITserver2024@!"; 
+	$dbuser = "red"; 
+	$dbpass = "490Pass"; 
 
 	//Creating connection with Database
 	try{
-	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
+	$conn = new PDO('mysql:dbname=it490;host=localhost', $dbuser, $dbpass); 
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
@@ -21,18 +22,30 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 	}
 function doLogin($user, $password){
 	global $conn, $client_log;
+	try{
 	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username");
 	$stmt->bindParam(':username', $user);
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	$client_log->publish($result);
+	}catch (PDOException $e){
+	$log = "Error: ". $e->getMessage();
+	print $log;
+	$client_log->publish($log);
+	}
 	$p1 = $result['Passwords'];
-	if (password_verify($password, $result['Passwords']){
+	if ($p1 != null){
 		return "allow";
 	}
 	else{
 		return "deny";
 	}
+	//if (password_verify($password, $p1)){
+	//	return "allow";
+	//}
+	//else{
+	//	return "deny";
+	//}
+}
 function requestProcessor($request)
 {
 	var_dump($request);
@@ -47,7 +60,7 @@ function requestProcessor($request)
       return doLogin($request['username'],$request['password']);
     case "validate_session":
       return doValidate($request['sessionId']);
-    case "register":
+    case "registration":
     	return createUser($request['username'],$request['email'], $request['password']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
@@ -57,5 +70,4 @@ function requestProcessor($request)
 	if ($log = null){
 	$log = "Connection Successful. Red testing";
 	$client_log->publish($log);}
-	
 ?>

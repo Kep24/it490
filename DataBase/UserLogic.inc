@@ -37,9 +37,11 @@ function isInputValid($username, $email, $password)
 
 function createUser($username, $email, $password) 
 {
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT)
+	global $conn, $client_log;
+	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	$client_log->publish($hashedPassword);
 	try{
-	$stmt = $conn->prepare("INSERT UserName, Email, PassWord FROM Users WHERE UserNames = :username && Email=:email Passwords = :password");
+	$stmt = $conn->prepare("INSERT INTO Users (UserNames, Email, Passwords) Values (:username, :email, :password)");
 	$stmt->bindParam(':username', $username);
 	$stmt->bindParam(':email', $email);
 	$stmt->bindParam(':password', $hashedPassword);
