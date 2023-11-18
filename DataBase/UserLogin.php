@@ -9,12 +9,12 @@ require_once('UserLogic.inc');
 
 $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
-	$dbuser = "red"; 
-	$dbpass = "490Pass"; 
+	$dbuser = "yessica"; 
+	$dbpass = "NJITserver2024@!"; 
 
 	//Creating connection with Database
 	try{
-	$conn = new PDO('mysql:dbname=it490;host=localhost', $dbuser, $dbpass); 
+	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
@@ -22,23 +22,28 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 	}
 function doLogin($user, $password){
 	global $conn, $client_log;
+	
 	try{
 	$stmt = $conn->prepare("SELECT Passwords FROM Users WHERE UserNames = :username");
 	$stmt->bindParam(':username', $user);
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	}catch (PDOException $e){
+	}
+	
+	catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
 	$client_log->publish($log);
+	
 	}
 	$p1 = $result['Passwords'];
-	if ($p1 != null){
+	if ($p1 == $password){
 		return "allow";
 	}
 	else{
 		return "deny";
 	}
+	
 	//if (password_verify($password, $p1)){
 	//	return "allow";
 	//}
