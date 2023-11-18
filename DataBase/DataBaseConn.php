@@ -2,7 +2,7 @@
 
 <?php 
 
-include 'UserRegistration.php';
+include 'UserLogic.php';
 
 echo "Connection Successful. Welcome!"; 
 
