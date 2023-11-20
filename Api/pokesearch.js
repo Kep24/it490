@@ -29,6 +29,7 @@ async function getGenData(gen) {
 function setList(results) {
   clearList();
   for (const poke of results) {
+    
     //creates a li element for each result item
     const resultItem = document.createElement("li");
 
@@ -49,7 +50,6 @@ function setList(results) {
 //pulls searchbar input
 function search_id() {
   let input = document.getElementById("search").value;
-  input = input.toLowerCase();
   getGenData(input);
 }
 
@@ -57,6 +57,12 @@ function search_id() {
 const search = document.getElementById("searchButton");
 search.addEventListener("click", () => {
   search_id();
+});
+
+//sets button and adds an eventlistener for clear button
+const clear = document.getElementById("clear");
+clear.addEventListener("click", () => {
+  clearList();
 });
 
 //clears list
@@ -67,30 +73,3 @@ function clearList() {
   }
 }
 
-$(function() {
-    var items = [{
-        text: "Adams",
-        value: "emp1"
-    }, {
-        text: "James",
-        value: "emp2"
-    }, {
-        text: "Maria",
-        value: "emp3"
-    }, {
-        text: "Jessica",
-        value: "emp4"
-    }, {
-        text: "Jenneth",
-        value: "emp5"
-    }];
-    $('#search').ejDropDownList({
-        dataSource: items,
-        fields: {
-            text: "text",
-            value: "value"
-        },
-        enableIncrementalSearch: true,
-        caseSensitiveSearch: true
-    });
-});
