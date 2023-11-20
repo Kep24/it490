@@ -38,7 +38,11 @@ function isInputValid($username, $email, $password)
 function createUser($username, $email, $password) 
 {
 	global $conn, $client_log;
+	try{
 	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	}catch (Exception $e) {
+	$log = "Caught Exception: ". $e->getMessage();
+	$client_log->publish($log)}
 	$client_log->publish($hashedPassword);
 	try{
 	$stmt = $conn->prepare("INSERT INTO Users (UserNames, Email, Passwords) Values (:username, :email, :password)");
@@ -47,7 +51,7 @@ function createUser($username, $email, $password)
 	$stmt->bindParam(':password', $hashedPassword);
 	$stmt->execute();
 	}catch (PDOException $e){
-	$log = "Error: ". $e->getMessage();
+	$log = "Caught Exception: ". $e->getMessage();
 	print $log;
 	$client_log->publish($log);
 	}
