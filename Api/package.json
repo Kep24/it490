@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "pokeapi-js-wrapper": "^1.2.3"
+    "pokeapi-js-wrapper": "^1.2.3",
+    "pokedex-promise-v2": "^4.1.1"
   }
 }
