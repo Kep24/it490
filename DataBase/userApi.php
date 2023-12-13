@@ -19,8 +19,7 @@ $client_api = new rabbitMQClient("testRabbitMQ.ini", "API");
        $log = "Error: ". $e->getMessage();
        print $log;
        $client_api->publish($log);
-       }
-
+       } 
 	
 ?>
 
