@@ -1,0 +1,17 @@
+[Unit]
+Description=Poke-Website
+After=mysqld.service
+StartLimitIntervalSec=1
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+StartLimitAction=reboot
+User=Yessica
+ExecStart=/usr/bin/env php /~/git/it490/DataBase/UserLogin.php
+
+
+[Install]
+WantedBy=multi-user.target
+
