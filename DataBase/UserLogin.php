@@ -15,11 +15,12 @@ $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 	//Creating connection with Database
 	try{
 	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
-	}catch (PDOException $e){
+	new rabbitMQClient("testRabbitMQ.ini", "Logging");}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
 	$client_log->publish($log);
 	}
+
 function doLogin($user, $password){
 	global $conn, $client_log;
 	
