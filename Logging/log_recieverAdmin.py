@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 import pika
 from datetime import datetime
-from pika import DeliveryMode
-from pika.exchange_type import ExchangeType
-
 now = datetime.now()
 
-credentials = pika.PlainCredentials('admin', '490Pass') #Put in your rabbitMQ user/pass here
-parameters = pika.ConnectionParameters('10.147.20.15', 5672, 'testHost', credentials)
+credentials = pika.PlainCredentials('RedAdmin', '490Pass') #Put in your rabbitMQ user/pass here
+parameters = pika.ConnectionParameters('10.147.20.57', 5672, 'testHost', credentials)
 connection = pika.BlockingConnection(parameters)
 
 channel=connection.channel()
