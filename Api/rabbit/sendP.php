@@ -12,8 +12,8 @@ $request['type'] = "login";
 $request['username'] = $argv[1];
 $request['password'] = $argv[2];
 $request['message'] = include('Api/test.php');
-$response = $client->send_request($request);
-//$response = $client->publish($request);
+// $response = $client->send_request($request);
+$response = $client->publish($request);
 
 
 
