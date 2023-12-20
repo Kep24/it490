@@ -33,9 +33,14 @@ P.getGenerationByName("generation-i")
 });
 
 app.get('/', (req, res)=>{ 
-	res.status(200); 
-  res.json({ news: 'fake'})
-	res.send("Welcome to root URL of Server"); 
+	res.status(200);
+	var data = info.pokemon_species
+	let pokeList = [];
+	for (const pokemon in data) {
+		pokeList.push(data[pokemon].name);
+	} 
+	res.json(pokeList);
+//   res.json(info.pokemon_species[0].name)
   
 }); 
 

@@ -57,7 +57,7 @@ function requestProcessor($request)
 	if(!isset($request['type']))
   {
     $log = "ERROR: unsupported message type";
-    $client_log->publish($log);
+    // $client_log->publish($log);
   }
   try{
   switch ($request['type'])
@@ -75,12 +75,14 @@ function requestProcessor($request)
   }catch (Exception $e){
   $log = "Error: ". $e->getMessage();
 	print $log;
-	$client_log->publish($log);}
+	// $client_log->publish($log);
+}
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 	$client_login = new rabbitMQServer("testRabbitMQ.ini", "Database");
 	$client_login->process_requests('requestProcessor'); 
 	if ($log = null){
 	$log = "NO Errors.";
-	$client_log->publish($log);}
+	// $client_log->publish($log);
+}
 ?>

@@ -20,11 +20,13 @@ const gen1 = new gen('gen1');
 
 P.getGenerationByName("generation-i")
     .then((response) => {
-      console.log(response);
+      var data = response.pokemon_species;
+      for (const pokemon in data) {
+        console.log(data[pokemon].name);
+      }
       const info = response;
     })
     .catch((error) => {
       console.log('There was an ERROR: ', error);
     });
-console.log("genSearch.js works");
-console.log("Second message");
+
