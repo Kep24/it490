@@ -11,7 +11,7 @@ $request = array();
 $request['type'] = "login";
 $request['username'] = $argv[1];
 $request['password'] = $argv[2];
-$request['message'] = "HI";
+$request['message'] = "Test";
 $response = $client->send_request($request);
 //$response = $client->publish($request);
 

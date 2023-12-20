@@ -63,10 +63,13 @@ function requestProcessor($request)
   switch ($request['type'])
   {
     case "login":
-      return doLogin($request['username'],$request['password']);
+      echo "client received response: ".PHP_EOL;
+      return "allow";
     case "validate_session":
+      echo "client received response: ".PHP_EOL;
       return doValidate($request['sessionId']);
     case "registration":
+        echo "client received response: ".PHP_EOL;
     	return createUser($request['username'],$request['email'], $request['password']);
   }
   }catch (Exception $e){
