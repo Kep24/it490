@@ -1,0 +1,5 @@
+List of things to do :
+
+1. Show Authentication
+2. Fix Logging System fully;
+3. 
