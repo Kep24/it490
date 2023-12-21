@@ -40,12 +40,12 @@ function doLogin($user, $password){
 	$p1 = $result['Passwords'];
 
 	//this is the statement to get a hashed password that needs to be stored in the database!
-	$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); 
+//	$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); 
 
 	//Gonna comment this out in order to test hashed passwords, UNCOMMENT if code gets broken!!!!!
-	//if ($p1 == $password){
+	if ($p1 == $password){
 
-	if(password_verify($password, $p1)){
+//	if(password_verify($password, $p1)){
 		return "allow";
 	}
 	else{
