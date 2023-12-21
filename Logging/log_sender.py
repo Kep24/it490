@@ -13,7 +13,9 @@ channel.exchange_declare(exchange='logs', exchange_type='fanout',
  passive=False, durable=True, auto_delete=False)
  
 
+
 queue = channel.queue_declare(queue='logging')
+
 
 channel.queue_bind(exchange="logs", queue=queue.method.queue)
 

@@ -2,6 +2,7 @@
 
 import pika
 
+
 credentials = pika.PlainCredentials('KepWeb', '490password')# Put in your rabbitMQ user/pass here
 
 parameters = pika.ConnectionParameters('10.147.20.15', 5672, 'testHost', credentials)
@@ -20,6 +21,7 @@ channel.queue_bind(exchange="logs", queue=queue_name)
 def callback(ch, method, properties, body):
 	
 	print(f" [x] {body}") 
+
  
 channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 channel.start_consuming()

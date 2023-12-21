@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import pika
 
+
 credentials = pika.PlainCredentials('RedAdmin', '490Pass') #Put in your rabbitMQ user/pass here
 parameters = pika.ConnectionParameters('10.147.20.57', 5672, 'testHost', credentials)
+
 connection = pika.BlockingConnection(parameters)
 
 channel=connection.channel()
