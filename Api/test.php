@@ -1,7 +1,8 @@
 <?php
     // $path = " Desktop\Fall '23\IT490 tings\it490\Api";
     // exec("cd".$path. " && node test.js", $out, $err);
-    exec("cd \Api  && node genSearch.js", $output);
+    //when testing on desktop add in a "." before the \Api
+    exec("cd .\Api  && node pokeInfo.js ditto", $output);
     $str = "";
     // foreach ($output as $x){
     //     echo"$x ";

@@ -11,14 +11,11 @@ const P = new Pokedex ()
 //         throw error
 //     }
 // })()
-class gen {
-  constructor(name) {
-    this.name = name;
-  }
-}
-const gen1 = new gen('gen1');
 
-P.getGenerationByName("generation-i")
+
+//works w/ command line input, format is "generation-i"
+var $gen = process.argv[2];
+P.getGenerationByName($gen)
     .then((response) => {
       var data = response.pokemon_species;
       for (const pokemon in data) {
@@ -29,4 +26,3 @@ P.getGenerationByName("generation-i")
     .catch((error) => {
       console.log('There was an ERROR: ', error);
     });
-

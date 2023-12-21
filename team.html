@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form class="form" action="javascript:void(0);">
+        <label for="Pokemon">Choose a pokemon</label>
+        <select name="pokemon" id="pokemon">
+          <option value="Bulbasaur">Bulbasaur</option>
+          <option value="Charmander">Charmander</option>
+          <option value="Squirtle">Squirtle</option>
+          <option value="Pikachu">Pikachu</option>
+          <option value="Togepi">Togepi</option>
+          <option value="Onix">Onix</option>
+        </select>
+        
+        <label for="Ability">Pick the ability</label>
+        <select name="ability" id="ability">
+          <option value="Overgrow">Overgrow</option>
+          <option value="Chlorophyll">Chlorophyll</option>
+        </select>
+
+        <button id="add" type="submit">Add Pokemon</button>
+        <button id="clear" class="clear-results">clear</button>
+      </form>
+    </div>
+    <div class="results-container" id="results">
+        <ul class="results-list" id="list"></ul>
+
+    </div>
+    <script src="teamScript.js"></script>
+  </body>
+</html>
