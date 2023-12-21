@@ -8,14 +8,22 @@ from pika.exchange_type import ExchangeType
 now = datetime.now()
 
 credentials = pika.PlainCredentials#('', '') Put in your rabbitMQ user/pass here
+<<<<<<< HEAD
 parameters = pika.ConnectionParameters('10.147.20.57', 5672, 'testHost', credentials)
+=======
+parameters = pika.ConnectionParameters('10.147.20.15', 5672, 'testHost', credentials)
+>>>>>>> 5cde3fb5320dac24f54c3a614adce0c00cf4a1a9
 connection = pika.BlockingConnection(parameters)
 
 channel=connection.channel()
 channel.exchange_declare(exchange='logs', exchange_type='fanout',
  passive=False, durable=True, auto_delete=False)
  
+<<<<<<< HEAD
 queue = channel.queue_declare(queue='loggingFront', durable=True)
+=======
+queue = channel.queue_declare(queue='loggingFront', Durable=True)
+>>>>>>> 5cde3fb5320dac24f54c3a614adce0c00cf4a1a9
 queue_name = queue.method.queue
 
 channel.queue_bind(exchange="logs", queue=queue_name)
