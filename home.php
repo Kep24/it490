@@ -13,7 +13,11 @@
     <p>Explore the Pokemon world:</p>
 
     <ul>
+<<<<<<< HEAD
         <li><a href="pokesearch.php">Pokemon Search</a></li>
+=======
+        <li><a href="pokesearch.php">Pokemon Team Builder</a></li>
+>>>>>>> 61fd0eb4c0d7b3381a2c37d66ef8cd42b338ea18
         <!-- Add more links if needed -->
     </ul>
 

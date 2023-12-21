@@ -25,5 +25,10 @@
     <!-- Results Display and Add to Team Form -->
     <?php include 'display_results.php'; ?>
 
+    <ul>
+        <li><a href="home.php">Return to Home Page</a></li>
+        <!-- Add more links if needed -->
+    </ul>
+
 </body>
 </html>

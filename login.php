@@ -1,5 +1,4 @@
 <!-- switched session.php for conn.php in the include -->
-<!-- <?php include 'conn.php'; ?> -->
 <?php
   ///if(isset($_SESSION['user'])){
     ///header('location: cart_view.php');
@@ -46,11 +45,11 @@
     	</form>
       <br>
       <a href="password_forgot.php">I forgot my password</a><br>
-      <a href="signup.php" class="text-center">Register a new membership</a><br>
-      <a href="index.php"><i class="fa fa-home"></i> Home</a>
+      <a href="register.php" class="text-center">Register a new membership</a><br>
   	</div>
 </div>
 	
 <?php ///include 'includes/scripts.php' ?>
 </body>
 </html>
+
