@@ -12,7 +12,7 @@
     <p>Explore the Pokemon world:</p>
 
     <ul>
-        <li><a href="pokemon_search.php">Pokemon Search</a></li>
+        <li><a href="pokesearch.php">Pokemon Team Builder</a></li>
         <!-- Add more links if needed -->
     </ul>
 
