@@ -43,9 +43,9 @@ function doLogin($user, $password){
 //	$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); 
 
 	//Gonna comment this out in order to test hashed passwords, UNCOMMENT if code gets broken!!!!!
-	if ($p1 == $password){
+//	if ($p1 == $password){
 
-//	if(password_verify($password, $p1)){
+	if(password_verify($password, $p1)){
 		return "allow";
 	}
 	else{
