@@ -2,20 +2,18 @@
 
 import pika
 from datetime import datetime
-from pika import DeliveryMode
-from pika.exchange_type import ExchangeType
 
 now = datetime.now()
 
 credentials = pika.PlainCredentials#('', '') Put in your rabbitMQ user/pass here
-parameters = pika.ConnectionParameters('10.147.20.15', 5672, 'testHost', credentials)
+parameters = pika.ConnectionParameters('10.147.20.57', 5672, 'testHost', credentials)
 connection = pika.BlockingConnection(parameters)
 
 channel=connection.channel()
 channel.exchange_declare(exchange='logs', exchange_type='fanout',
  passive=False, durable=True, auto_delete=False)
  
-queue = channel.queue_declare(queue='loggingAPI', Durable=True)
+queue = channel.queue_declare(queue='loggingAPI', durable=True)
 queue_name = queue.method.queue
 
 channel.queue_bind(exchange="logs", queue=queue_name)
