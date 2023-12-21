@@ -5,7 +5,6 @@
 require_once('rabbitMQLib.inc');
 require_once('get_host_info.inc');
 require_once('path.inc');
-require_once('UserLogic.inc');
 
 // $client_log = new rabbitMQClient("testRabbitMQ.ini", "Logging");
 
@@ -79,7 +78,7 @@ function requestProcessor($request)
 }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
-	$client_login = new rabbitMQServer("testRabbitMQ.ini", "Database");
+	$client_login = new rabbitMQServer("testRabbitMQ.ini", "testServer");
 	$client_login->process_requests('requestProcessor'); 
 	if ($log = null){
 	$log = "NO Errors.";
