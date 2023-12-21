@@ -12,7 +12,7 @@ require_once('path.inc');
 
 	//Creating connection with Database
 	try{
-	$conn = new PDO('mysql:dbname=IT490;host=localhost', $dbuser, $dbpass); 
+	$conn = new PDO('mysql:dbname=IT490;host=10.147.20.57', $dbuser, $dbpass); 
 	}catch (PDOException $e){
 	$log = "Error: ". $e->getMessage();
 	print $log;
